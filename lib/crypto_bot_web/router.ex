@@ -25,7 +25,7 @@ defmodule CryptoBotWeb.Router do
     pipe_through :api
 
     get "/webhook", PageController, :verify_webhook_token
-    post "/webhook", PageController, :handle_message
+    post "/webhook", PageController, :handle_event
   end
 
   # Enables the Swoosh mailbox preview in development.
