@@ -46,7 +46,7 @@ defmodule CryptoBot.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.8"},
-      {:edeliver, "~> 1.9"},
+      {:edeliver, "~> 1.8"},
       {:distillery, "~> 2.1"}
     ]
   end
