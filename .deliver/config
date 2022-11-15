@@ -6,18 +6,7 @@ BUILD_AT="/home/ravi/$APP/builds"
 
 PRODUCTION_HOSTS="66.42.56.10"
 PRODUCTION_USER="ravi"
-DELIVER_TO="/home/ravi/crypto_bot"
-
-# For *Phoenix* projects, symlink prod.secret.exs to our tmp source
-pre_erlang_get_and_update_deps() {
-  local _prod_secret_path="/home/ravi/prod.secret.exs"
-  if [ "$TARGET_MIX_ENV" = "prod" ]; then
-    __sync_remote "
-      [ -f ~/.profile ] && source ~/.profile
-      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
-    "
-  fi
-}
+DELIVER_TO="/home/ravi/$APP"
 
 pre_erlang_clean_compile() {
   status "Building static files"
@@ -26,7 +15,7 @@ pre_erlang_clean_compile() {
     set -e
     cd '$BUILD_AT'
     mkdir -p priv/static
-    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD esbuild default --minify $SILENCE
+    npm run deploy --prefix ./assets $SILENCE
   "
 
   status "Running phx.digest.clean"
@@ -51,8 +40,8 @@ post_extract_release_archive() {
   __sync_remote "
     [ -f ~/.profile ] && source ~/.profile
     set -e
-    if [ -f /home/ravi/$APP/$APP/var/start_erl.data ]; then
-      rm /home/ravi/$APP/$APP/var/start_erl.data
+    if [ -f /home/ravi/crypto_bot/crypto_bot/var/start_erl.data ]; then
+      rm /home/ravi/crypto_bot/crypto_bot/var/start_erl.data
     fi
   "
 }
