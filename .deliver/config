@@ -20,14 +20,6 @@ pre_erlang_get_and_update_deps() {
 }
 
 pre_erlang_clean_compile() {
-  status "Installing NPM dependencies"
-  __sync_remote "
-    [ -f ~/.profile ] && source ~/.profile
-    set -e
-    cd '$BUILD_AT'
-    npm install --prefix ./assets $SILENCE
-  "
-
   status "Building static files"
   __sync_remote "
     [ -f ~/.profile ] && source ~/.profile
