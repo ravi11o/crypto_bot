@@ -1,0 +1,66 @@
+APP="cryptobot"
+
+BUILD_HOST="65.20.81.230"
+BUILD_USER="ravi"
+BUILD_AT="/home/ravi/$APP/builds"
+
+PRODUCTION_HOSTS="65.20.81.230"
+PRODUCTION_USER="ravi"
+DELIVER_TO="/home/ravi/cryptobot"
+
+# For *Phoenix* projects, symlink prod.secret.exs to our tmp source
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/home/ravi/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      [ -f ~/.profile ] && source ~/.profile
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
+
+pre_erlang_clean_compile() {
+  status "Installing NPM dependencies"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd '$BUILD_AT'
+    npm install --prefix ./assets $SILENCE
+  "
+
+  status "Building static files"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd '$BUILD_AT'
+    mkdir -p priv/static
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD esbuild default --minify $SILENCE
+  "
+
+  status "Running phx.digest.clean"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd '$BUILD_AT'
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest.clean $SILENCE
+  "
+
+  status "Running phx.digest"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd '$BUILD_AT'
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
+  "
+}
+
+post_extract_release_archive() {
+  status "Removing release version start_erl.data file"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    if [ -f /home/ravi/$APP/$APP/var/start_erl.data ]; then
+      rm /home/ravi/$APP/$APP/var/start_erl.data
+    fi
+  "
+}
