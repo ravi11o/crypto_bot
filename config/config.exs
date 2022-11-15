@@ -36,12 +36,12 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-config :crypto_bot,
-  facebook_chat_bot: %{
-    base_url: "https://graph.facebook.com",
-    page_access_token: System.get_env("FACEBOOK_PAGE_ACCESS_TOKEN"),
-    webhook_verify_token: System.get_env("FACEBOOK_WEBHOOK_VERIFY_TOKEN")
-  }
+# config :crypto_bot,
+#   facebook_chat_bot: %{
+#     base_url: "https://graph.facebook.com",
+#     page_access_token: System.get_env("FACEBOOK_PAGE_ACCESS_TOKEN"),
+#     webhook_verify_token: System.get_env("FACEBOOK_WEBHOOK_VERIFY_TOKEN")
+#   }
 
 # Configures Elixir's Logger
 config :logger, :console,
