@@ -45,7 +45,9 @@ defmodule CryptoBotWeb.PageController do
   end
 
   defp verify_webhook(%{"hub.mode" => mode, "hub.verify_token" => token}) do
-    webhook_verify_token = System.get_env("FACEBOOK_WEBHOOK_VERIFY_TOKEN")
+    chat_bot = Application.get_env(:crypto_bot, :facebook_chat_bot)
+    webhook_verify_token = chat_bot.webhook_verify_token
+    # webhook_verify_token = System.get_env("FACEBOOK_WEBHOOK_VERIFY_TOKEN")
     mode == "subscribe" && token == webhook_verify_token
   end
 end
