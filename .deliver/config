@@ -1,10 +1,10 @@
 APP="crypto_bot"
 
-BUILD_HOST="65.20.81.230"
+BUILD_HOST="66.42.56.10"
 BUILD_USER="ravi"
 BUILD_AT="/home/ravi/$APP/builds"
 
-PRODUCTION_HOSTS="65.20.81.230"
+PRODUCTION_HOSTS="66.42.56.10"
 PRODUCTION_USER="ravi"
 DELIVER_TO="/home/ravi/crypto_bot"
 
