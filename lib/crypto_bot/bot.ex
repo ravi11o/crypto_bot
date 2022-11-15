@@ -15,7 +15,7 @@ defmodule CryptoBot.Bot do
     url = message_url()
     headers = [{"Content-type", "application/json"}]
 
-    case HTTPoison.post(url, Poison.encode!(msg_template), headers, []) do
+    case HTTPoison.post(url, Jason.encode!(msg_template), headers, []) do
       {:ok, _response} ->
         Logger.info("Message Sent to Bot")
         :ok

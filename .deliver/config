@@ -1,4 +1,4 @@
-APP="cryptobot"
+APP="crypto_bot"
 
 BUILD_HOST="65.20.81.230"
 BUILD_USER="ravi"
@@ -6,7 +6,7 @@ BUILD_AT="/home/ravi/$APP/builds"
 
 PRODUCTION_HOSTS="65.20.81.230"
 PRODUCTION_USER="ravi"
-DELIVER_TO="/home/ravi/cryptobot"
+DELIVER_TO="/home/ravi/crypto_bot"
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
