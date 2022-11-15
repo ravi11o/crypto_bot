@@ -25,7 +25,7 @@ pre_erlang_clean_compile() {
     set -e
     cd '$BUILD_AT'
     mkdir -p priv/static
-    npm run deploy --prefix ./assets $SILENCE
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD esbuild default --minify $SILENCE
   "
 
   status "Running phx.digest.clean"
