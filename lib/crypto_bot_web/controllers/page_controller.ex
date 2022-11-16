@@ -50,4 +50,6 @@ defmodule CryptoBotWeb.PageController do
     # webhook_verify_token = System.get_env("FACEBOOK_WEBHOOK_VERIFY_TOKEN")
     mode == "subscribe" && token == webhook_verify_token
   end
+
+  defp verify_webhook(_params), do: false
 end
