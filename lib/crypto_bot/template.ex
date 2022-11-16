@@ -69,7 +69,7 @@ defmodule CryptoBot.Template do
     }
   end
 
-  defp template_message(event, payload) do
+  def template_message(event, payload) do
     message = %{
       "attachment" => %{
         "type" => "template",
@@ -94,7 +94,7 @@ defmodule CryptoBot.Template do
     messaging
   end
 
-  defp recipient(event) do
+  def recipient(event) do
     sender = get_event_data(event)["sender"]
 
     %{
@@ -109,8 +109,6 @@ defmodule CryptoBot.Template do
   @spec get_first_name(map()) :: String.t()
   def get_first_name(event) do
     sender = get_event_data(event)["sender"]
-    # chat_bot = Application.get_env(:crypto_bot, :facebook_chat_bot)
-    # page_token = chat_bot.page_access_token
     page_token = System.get_env("FACEBOOK_PAGE_ACCESS_TOKEN")
     token_path = "?access_token=#{page_token}"
     profile_path = Path.join([@base_url, sender["id"], token_path])

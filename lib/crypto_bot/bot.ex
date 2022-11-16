@@ -29,8 +29,6 @@ defmodule CryptoBot.Bot do
   @doc false
 
   defp message_url do
-    # chat_bot = Application.get_env(:crypto_bot, :facebook_chat_bot)
-    # token = chat_bot.page_access_token
     token = System.get_env("FACEBOOK_PAGE_ACCESS_TOKEN")
     token_path = "?access_token=#{token}"
     Path.join([@base_message_url, token_path])

@@ -97,7 +97,7 @@ defmodule CryptoBot.MessageHandler do
         acc <> "#{unix_to_date(time)}:- $#{Float.round(price, 2)} \n"
       end)
 
-    "Price feed of last 14 days for #{coin_id} \n\n" <> message
+    "Price feed of last #{length(price_feed)} days for #{coin_id} \n\n" <> message
   end
 
   defp unix_to_date(timestamp) do
