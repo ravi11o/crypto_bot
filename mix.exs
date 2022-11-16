@@ -47,8 +47,7 @@ defmodule CryptoBot.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.8"},
       {:edeliver, "~> 1.8"},
-      {:distillery, git: "https://github.com/ravi11o/distillery", override: true},
-      {:bypass, "~> 2.1"}
+      {:distillery, git: "https://github.com/ravi11o/distillery", override: true}
     ]
   end
 
